@@ -14,3 +14,21 @@ services:
       target: shipment
     ports:
       - 17000:7000
+  db:
+    build:
+      context: .
+      dockerfile: ./mysql/Dockerfile
+    ports:
+      - 13306:3306
+    volumes:
+      - ./mysql/log:/var/log/mysql
+  php:
+    build:
+      context: .
+      dockerfile: ./php.dockerfile
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx.dockerfile
+    ports:
+      - 10080:80
